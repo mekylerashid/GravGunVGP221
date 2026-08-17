@@ -155,7 +155,7 @@ void AFPSCharacter::OnHurtPlayer(float DamageAmount)
 
 	if (Health <= 0.0f)
 	{
-		UGameplayStatics::OpenLevel(this, FName("GameMap"));
+		UGameplayStatics::OpenLevel(this, FName("GameOverMap"));
 	}
 }
 
