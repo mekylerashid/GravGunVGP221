@@ -2,8 +2,11 @@
 
 #pragma once
 
+#include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Projectile/FPSProjectile.h"
 #include "FPSCharacter.generated.h"
 
 class UInputMappingContext;
@@ -44,6 +47,18 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputAction* FireAction;
 
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* FPSCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* FPSMeshComponent;
+
+	UPROPERTY(EditAnywhere)
+	FVector MuzzleOffset;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AFPSProjectile> ProjectileClass;
+
 	UFUNCTION()
 	void Move(const FInputActionValue& Value);
 
@@ -62,5 +77,12 @@ public:
 
 	UFUNCTION()
 	void Fire();
+
+	UFUNCTION()
+	void OnHurtPlayer(float DamageAmount);
+
+private:
+	float Health = 100.0f;
+	float MaxHealth = 100.0f;
 
 };
